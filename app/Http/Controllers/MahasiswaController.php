@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class MahasiswaController extends Controller
 {
@@ -93,6 +94,15 @@ class MahasiswaController extends Controller
         $mahasiswa->delete();
         return response()->json([
             'success' => true
+        ]);
+    }
+
+    public function show_data_to_browser()
+    {
+        $client = new Client();
+        $response = $client->request('GET', 'http://192.168.56.69:8080/api/mahasiswa');
+        return response()->json([
+            'mahasiswas' => json_decode($response->getBody()->getContents())
         ]);
     }
 }
