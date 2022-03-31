@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('mahasiswa', [MahasiswaController::class, 'show_data_to_browser']);
+Route::get('mahasiswa/create', [MahasiswaController::class, 'create']);
+Route::get('mahasiswa/{id}/edit', [MahasiswaController::class, 'edit']);

@@ -27,7 +27,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('mahasiswa.create');
     }
 
     /**
@@ -63,9 +63,12 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit($id)
     {
-        //
+        $client = new Client();
+        $url = 'http://192.168.56.69:8080/api/mahasiswa/' . $id;
+        $mahasiswa = $client->request('GET', $url);
+        return view('mahasiswa.edit', compact('mahasiswa'));
     }
 
     /**
@@ -75,9 +78,11 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mahasiswa $mahasiswa)
+    public function update($request, $id)
     {
-        $mahasiswa->update($request->all());
+        $client = new Client();
+        $url = 'http://192.168.56.69:8080/api/mahasiswa/' . $id;
+        $mahasiswa = $client->request('PUT', $url, $request);
         return response()->json([
             'mahasiswa' => $mahasiswa
         ]);
@@ -105,4 +110,17 @@ class MahasiswaController extends Controller
             'mahasiswas' => json_decode($response->getBody()->getContents())
         ]);
     }
+
+    // public function create_in_browser()
+    // {
+        // $client = new Client();
+        // $response = $client->request('POST', 'http://192.168.56.69:8080/api/mahasiswa', [
+        //     'nama' => $request->nama,
+        //     'nim' => $request->nim,
+        //     'prodi' => $request->prodi
+        // ]);
+        // return response()->json([
+        //     'mahasiswas' => json_decode($response->getBody()->getContents())
+        // ]);
+    // }
 }
