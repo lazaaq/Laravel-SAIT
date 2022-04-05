@@ -21,7 +21,6 @@ Route::get('/', function () {
 
 Route::get('mahasiswa', [MahasiswaController::class, 'show_data_to_browser']);
 Route::get('mahasiswa/create', [MahasiswaController::class, 'create']);
-Route::post('mahasiswa', [MahasiswaController::class, 'store']);
 Route::get('mahasiswa/{id}/edit', [MahasiswaController::class, 'edit']);
 
 Route::prefix('bookstore')->group(function () {
