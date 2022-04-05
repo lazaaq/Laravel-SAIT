@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookstoreController;
 use App\Http\Controllers\MahasiswaController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,11 @@ Route::get('/', function () {
 
 Route::get('mahasiswa', [MahasiswaController::class, 'show_data_to_browser']);
 Route::get('mahasiswa/create', [MahasiswaController::class, 'create']);
+Route::post('mahasiswa', [MahasiswaController::class, 'store']);
 Route::get('mahasiswa/{id}/edit', [MahasiswaController::class, 'edit']);
+
+Route::prefix('bookstore')->group(function () {
+    Route::get('new', [BookstoreController::class, 'new']);
+    Route::get('search/{query}/{page}', [BookstoreController::class, 'search']);
+    Route::get('books/{isbn13}', [BookstoreController::class, 'books']);
+});
