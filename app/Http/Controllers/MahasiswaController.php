@@ -80,11 +80,9 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function update($request, $id)
+    public function update(Mahasiswa $mahasiswa, Request $request)
     {
-        $client = new Client();
-        $url = 'http://192.168.56.69:8080/api/mahasiswa/' . $id;
-        $mahasiswa = $client->request('PUT', $url, $request);
+        $mahasiswa->update($request->all());
         return response()->json([
             'mahasiswa' => $mahasiswa
         ]);
