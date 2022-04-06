@@ -34,7 +34,9 @@
             <td>{{ $mahasiswa->prodi }}</td>
             <td>
               <a class="badge bg-warning text-dark rounded-pill border-0" href="{{ route('mahasiswa.edit', $mahasiswa->id) }}">Edit</a>
-              <button class="badge bg-danger rounded-pill border-0">Delete</button>
+              <form action="http://192.168.56.69:8080/api/mahasiswa/{{ $mahasiswa->id }}/delete" method="post" target="_blank">
+                <button class="badge bg-danger rounded-pill border-0">Delete</button>
+              </form>
             </td>
           </tr>
           @endforeach
