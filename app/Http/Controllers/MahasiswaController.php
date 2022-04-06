@@ -67,8 +67,10 @@ class MahasiswaController extends Controller
     {
         $client = new Client();
         $url = 'http://192.168.56.69:8080/api/mahasiswa/' . $id;
-        $mahasiswa = $client->request('GET', $url);
-        return view('mahasiswa.edit', compact('mahasiswa'));
+        $mahasiswa = $client->request('GET', $url)->getBody()->getContents();
+        return view('mahasiswa.edit', [
+            'mahasiswa' => json_decode($mahasiswa)->mahasiswa        
+        ]);
     }
 
     /**
@@ -106,21 +108,10 @@ class MahasiswaController extends Controller
     {
         $client = new Client();
         $response = $client->request('GET', 'http://192.168.56.69:8080/api/mahasiswa');
-        return response()->json([
-            'mahasiswas' => json_decode($response->getBody()->getContents())
-        ]);
-    }
-
-    // public function create_in_browser()
-    // {
-        // $client = new Client();
-        // $response = $client->request('POST', 'http://192.168.56.69:8080/api/mahasiswa', [
-        //     'nama' => $request->nama,
-        //     'nim' => $request->nim,
-        //     'prodi' => $request->prodi
-        // ]);
+        $mahasiswas = json_decode($response->getBody()->getContents());
         // return response()->json([
-        //     'mahasiswas' => json_decode($response->getBody()->getContents())
+        //     'mahasiswas' => $mahasiswas
         // ]);
-    // }
+        return view('mahasiswa.index', ['mahasiswas' => $mahasiswas->mahasiswas]);
+    }
 }

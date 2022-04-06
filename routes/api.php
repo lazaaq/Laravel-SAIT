@@ -19,8 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('mahasiswa', [MahasiswaController::class, 'index']); // semua mahasiswa
-Route::get('mahasiswa/{mahasiswa}', [MahasiswaController::class, 'show']); // 1 mahasiswa
-Route::post('mahasiswa', [MahasiswaController::class, 'store']); // tambah mahasiswa
-Route::put('mahasiswa/{mahasiswa}', [MahasiswaController::class, 'update']); // update mahasiswa
-Route::delete('mahasiswa/{mahasiswa}', [MahasiswaController::class, 'destroy']); // hapus mahasiswa
+Route::get('mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index'); // semua mahasiswa
+Route::get('mahasiswa/{mahasiswa}', [MahasiswaController::class, 'show'])->name('mahasiswa.show'); // 1 mahasiswa
+Route::post('mahasiswa', [MahasiswaController::class, 'store'])->name('mahasiswa.store'); // tambah mahasiswa
+Route::put('mahasiswa/{mahasiswa}', [MahasiswaController::class, 'update'])->name('mahasiswa.update'); // update mahasiswa
+Route::delete('mahasiswa/{mahasiswa}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy'); // hapus mahasiswa
