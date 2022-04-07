@@ -24,7 +24,8 @@ Route::get('mahasiswa/create', [MahasiswaController::class, 'create'])->name('ma
 Route::get('mahasiswa/{id}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
 
 Route::prefix('bookstore')->group(function () {
-    Route::get('new', [BookstoreController::class, 'new']);
-    Route::get('search/{query}/{page}', [BookstoreController::class, 'search']);
-    Route::get('books/{isbn13}', [BookstoreController::class, 'books']);
+    Route::get('', [BookstoreController::class, 'index'])->name('bookstore.index');
+    Route::get('new', [BookstoreController::class, 'new'])->name('bookstore.new');
+    Route::get('search', [BookstoreController::class, 'search'])->name('bookstore.search');
+    Route::get('books', [BookstoreController::class, 'books'])->name('bookstore.books');
 });
