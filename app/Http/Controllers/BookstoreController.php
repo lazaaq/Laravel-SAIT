@@ -14,7 +14,7 @@ class BookstoreController extends Controller
     public function new() {
         $client = new Client();
         $url = 'https://api.itbook.store/1.0/new';
-        $response = $client->request('GET', $url)->getBody()->getContents();
+        $response = $client->request('GET', $url, ['verify' => false])->getBody()->getContents();
         $response = json_decode($response);
         return view('bookstore.new', [
             'books' => $response
@@ -25,7 +25,7 @@ class BookstoreController extends Controller
         if ($request->has('query') && $request->has('page')) {
             $client = new Client();
             $url = 'https://api.itbook.store/1.0/search/' . $request->input('query') . '/' . $request->input('page');
-            $response = $client->request('GET', $url)->getBody()->getContents();
+            $response = $client->request('GET', $url, ['verify' => false])->getBody()->getContents();
             $response = json_decode($response);
             return view('bookstore.search', [
                 'books' => $response,
@@ -45,14 +45,16 @@ class BookstoreController extends Controller
         if($request->isbn13) {
             $client = new Client();
             $url = 'https://api.itbook.store/1.0/books/' . $request->isbn13;
-            $response = $client->request('GET', $url)->getBody()->getContents();
+            $response = $client->request('GET', $url, ['verify' => false])->getBody()->getContents();
             $response = json_decode($response);
             return view('bookstore.books', [
-                'books' => $response
+                'books' => $response,
+                'isbn13' => $request->isbn13
             ]);
         } else {
             return view('bookstore.books', [
-                'books' => null
+                'books' => null,
+                'isbn13' => null
             ]);
         }
     }

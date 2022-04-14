@@ -34,9 +34,9 @@
 @section('contents')
 <div class="container w-100 h-100">
   <div class="d-flex justify-content-center align-items-center w-100 h-100">
-      <a href="{{ route('bookstore.new') }}" class="mybutton btn-new">New</a>
-      <a href="{{ route('bookstore.search') }}" class="mybutton btn-search">Search</a>
-      <a href="{{ route('bookstore.books') }}" class="mybutton btn-books">Books</a>
+      <a href="{{ route('bookstore.new') }}" class="mybutton btn-new">New Books</a>
+      <a href="{{ route('bookstore.search') }}" class="mybutton btn-search">Search by Title</a>
+      <a href="{{ route('bookstore.books') }}" class="mybutton btn-books">Search by ISBN13</a>
   </div>
 </div>
 @endsection
