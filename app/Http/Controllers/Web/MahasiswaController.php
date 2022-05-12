@@ -53,7 +53,7 @@ class MahasiswaController extends Controller
 
         // update data in ubuntu server
         $client = new Client();
-        $response = $client->request('POST', 'http://192.168.56.69:8080/api/mahasiswa/' . $id . '/update', ['form_params' => [
+        $response = $client->request('PUT', 'http://192.168.56.69:8080/api/mahasiswa/' . $id . '/update', ['form_params' => [
             'nama' => $request->nama,
             'nim' => $request->nim,
             'prodi' => $request->prodi,
@@ -70,7 +70,7 @@ class MahasiswaController extends Controller
 
         // delete data in ubuntu server
         $client = new Client();
-        $response = $client->request('POST', 'http://192.168.56.69:8080/api/mahasiswa/' . $id . '/delete');
+        $response = $client->request('DELETE', 'http://192.168.56.69:8080/api/mahasiswa/' . $id . '/delete');
 
         // redirect to index page
         return redirect('/mahasiswa');
