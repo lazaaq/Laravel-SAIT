@@ -111,10 +111,6 @@ class MahasiswaController extends Controller
         $client = new Client();
         $response = $client->request('GET', 'http://192.168.56.69:8080/api/mahasiswa');
         $mahasiswa_ubuntu = json_decode($response->getBody()->getContents());
-        // dd($mahasiswas);
-        // return response()->json([
-        //     'mahasiswas' => $mahasiswas
-        // ]);
         return view('mahasiswa.index', [
             'mahasiswa_lokal' => $mahasiswa_lokal,
             'mahasiswa_ubuntu' => $mahasiswa_ubuntu->mahasiswas
