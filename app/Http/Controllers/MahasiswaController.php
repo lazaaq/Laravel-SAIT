@@ -70,11 +70,9 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        $client = new Client();
-        $url = 'http://192.168.56.69:8080/api/mahasiswa/' . $id;
-        $mahasiswa = $client->request('GET', $url)->getBody()->getContents();
+        $mahasiswa = Mahasiswa::find($id);
         return view('mahasiswa.edit', [
-            'mahasiswa' => json_decode($mahasiswa)->mahasiswa        
+            'mahasiswa' => $mahasiswa    
         ]);
     }
 
@@ -109,13 +107,17 @@ class MahasiswaController extends Controller
 
     public function show_data_to_browser()
     {
+        $mahasiswa_lokal = Mahasiswa::all();
         $client = new Client();
         $response = $client->request('GET', 'http://192.168.56.69:8080/api/mahasiswa');
-        $mahasiswas = json_decode($response->getBody()->getContents());
+        $mahasiswa_ubuntu = json_decode($response->getBody()->getContents());
         // dd($mahasiswas);
         // return response()->json([
         //     'mahasiswas' => $mahasiswas
         // ]);
-        return view('mahasiswa.index', ['mahasiswas' => $mahasiswas->mahasiswas]);
+        return view('mahasiswa.index', [
+            'mahasiswa_lokal' => $mahasiswa_lokal,
+            'mahasiswa_ubuntu' => $mahasiswa_ubuntu->mahasiswas
+        ]);
     }
 }

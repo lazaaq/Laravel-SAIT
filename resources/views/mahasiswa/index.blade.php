@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="container mt-5">
-      <h1 class="text-center">Daftar Mahasiswa</h1>
+      <h2 class="text-center">Daftar Mahasiswa Lokal</h2>
       <hr>
       <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">Add Mahasiswa</a>
       <table class="table table-striped table-hover">
@@ -26,7 +26,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($mahasiswas as $mahasiswa)
+          @foreach ($mahasiswa_lokal as $mahasiswa)
           <tr>
             <td>{{ $mahasiswa->id }}</td>
             <td>{{ $mahasiswa->nama }}</td>
@@ -34,7 +34,9 @@
             <td>{{ $mahasiswa->prodi }}</td>
             <td>
               <a class="badge bg-warning text-dark rounded-pill border-0" href="{{ route('mahasiswa.edit', $mahasiswa->id) }}">Edit</a>
-              <form action="http://192.168.56.69:8080/api/mahasiswa/{{ $mahasiswa->id }}/delete" method="post" target="_blank">
+              <form action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="post">
+                @csrf
+                @method('DELETE')
                 <button class="badge bg-danger rounded-pill border-0">Delete</button>
               </form>
             </td>
@@ -42,7 +44,39 @@
           @endforeach
         </tbody>
       </table>
-
+      <br> <br> <br>
+      <h2 class="text-center">Daftar Mahasiswa Ubuntu</h2>
+      <hr>
+      <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">Add Mahasiswa</a>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>    
+            <th>ID</th>
+            <th>Nama Lengkap</th>
+            <th>NIM</th>
+            <th>Prodi</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($mahasiswa_ubuntu as $mahasiswa)
+          <tr>
+            <td>{{ $mahasiswa->id }}</td>
+            <td>{{ $mahasiswa->nama }}</td>
+            <td>{{ $mahasiswa->nim }}</td>
+            <td>{{ $mahasiswa->prodi }}</td>
+            <td>
+              <a class="badge bg-warning text-dark rounded-pill border-0" href="{{ route('mahasiswa.edit', $mahasiswa->id) }}">Edit</a>
+              <form action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button class="badge bg-danger rounded-pill border-0">Delete</button>
+              </form>
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

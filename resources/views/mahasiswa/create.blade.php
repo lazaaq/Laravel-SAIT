@@ -12,7 +12,8 @@
   <div class="container mt-5">
     <h2 class="text-center">Create Mahasiswa</h2>
     <hr>
-    <form action="http://192.168.56.69:8080/api/mahasiswa" method="post" target="_blank">
+    <form action="{{ route('mahasiswa.store') }}" method="post">
+      @csrf
       <div class="mb-3">
         <label for="nama" class="form-label">Nama Lengkap</label>
         <input type="text" class="form-control" id="nama" name="nama" placeholder="John Doe">
