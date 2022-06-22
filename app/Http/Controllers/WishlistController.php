@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class WishlistController extends Controller
@@ -14,7 +15,12 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        $wishlists = Wishlist::all();
+        $client = new Client();
+        $url = 'http://192.168.56.69:8080/api/wishlist';
+        $response = $client->request('GET', $url, ['verify' => false])->getBody()->getContents();
+        $wishlists = json_decode($response)->data;
+        $wishlists = collect($wishlists);
+
         $wishlistWish = $wishlists->where('status', 'wish');
         $wishlistBought = $wishlists->where('status', 'bought');
         $wishlistReading = $wishlists->where('status', 'reading');
@@ -40,7 +46,10 @@ class WishlistController extends Controller
      */
     public function store(Request $request)
     {
-        Wishlist::create($request->all());
+        $client = new Client();
+        $url = 'http://192.168.56.69:8080/api/wishlist';
+        $response = $client->request('POST', $url, ['form_params' => $request->all()]);
+
         return redirect('/wishlist');
     }
 
@@ -73,13 +82,14 @@ class WishlistController extends Controller
      * @param  \App\Models\Wishlist  $wishlist
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Wishlist $wishlist)
+    public function update(Request $request, $id)
     {
-        $status = $request->status;
-        $wishlist->update([
-            'status' => $status
-        ]);
-        return redirect()->back();
+        $client = new Client();
+        $url = 'http://192.168.56.69:8080/api/wishlist/' . $id;
+        $response = $client->request('PUT', $url, ['form_params' => [
+            'status' => $request->status
+        ]]);
+        return redirect('/wishlist');
     }
 
     /**
@@ -88,10 +98,12 @@ class WishlistController extends Controller
      * @param  \App\Models\Wishlist  $wishlist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wishlist $wishlist)
+    public function destroy($id)
     {
-        $wishlist->delete();
-        return redirect()->back();
+        $client = new Client();
+        $url = 'http://192.168.56.69:8080/api/wishlist/' . $id;
+        $response = $client->request('DELETE', $url);
+        return redirect('/wishlist');
     }
 
 
