@@ -31,7 +31,7 @@
 @section('contents')
 <div class="container w-100 h-100">
   <div class="d-flex justify-content-center align-items-center w-100 h-100">
-      <a href="/mahasiswa" class="mybutton btn-mahasiswa">Mahasiswa</a>
+      <a href="/wishlist" class="mybutton btn-mahasiswa">My Wishlist</a>
       <a href="/bookstore" class="mybutton btn-bookstore">Bookstore</a>
   </div>
 </div>

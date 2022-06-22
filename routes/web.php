@@ -30,10 +30,7 @@ Route::put('mahasiswa/{id}/update', [WebMahasiswaController::class, 'update'])->
 Route::delete('mahasiswa/{id}/delete', [WebMahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
 
 Route::prefix('bookstore')->group(function () {
-    Route::get('', [BookstoreController::class, 'index'])->name('bookstore.index');
-    Route::get('new', [BookstoreController::class, 'new'])->name('bookstore.new');
-    Route::get('search', [BookstoreController::class, 'search'])->name('bookstore.search');
-    Route::get('books', [BookstoreController::class, 'books'])->name('bookstore.books');
+    Route::get('', [BookstoreController::class, 'search'])->name('bookstore.index');
 });
 
 Route::resource('/wishlist', WishlistController::class);

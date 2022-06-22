@@ -33,7 +33,10 @@
 
 @section('contents')
 <div class="container" style="padding: 5em 3em;">
-  <h2 class="lead display-4 text-center">YOUR WISHLIST</h2>
+  <h2 class="lead display-4 text-center">Your Wishlist</h2>
+  <div class="my-5 text-end">
+    <a href="{{ route('bookstore.index') }}">Ke Bookstore</a>
+  </div>
 
   <h3 class="mt-5">WISH</h3>
   <div class="d-flex justify-content-center align-items-center w-100 h-100">
