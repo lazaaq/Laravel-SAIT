@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookstoreController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Web\MahasiswaController as WebMahasiswaController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +35,5 @@ Route::prefix('bookstore')->group(function () {
     Route::get('search', [BookstoreController::class, 'search'])->name('bookstore.search');
     Route::get('books', [BookstoreController::class, 'books'])->name('bookstore.books');
 });
+
+Route::resource('/wishlist', WishlistController::class);
