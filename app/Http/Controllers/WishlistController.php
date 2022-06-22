@@ -93,4 +93,35 @@ class WishlistController extends Controller
         $wishlist->delete();
         return redirect()->back();
     }
+
+
+    public function apiIndex() {
+        $wishlists = Wishlist::all();
+        return response()->json([
+            'data' => $wishlists
+        ]);
+    }
+
+    public function apiStore(Request $request) {
+        $wishlist = Wishlist::create($request->all());
+        return response()->json([
+            'data' => $wishlist
+        ]);
+    }
+
+    public function apiUpdate(Request $request, Wishlist $wishlist) {
+        $wishlist->update([
+            'status' => $request->status
+        ]);
+        return response()->json([
+            'data' => $wishlist
+        ]);
+    }
+
+    public function apiDelete(Wishlist $wishlist) {
+        $wishlist->delete();
+        return response()->json([
+            'data' => 'success'
+        ]);
+    }
 }
